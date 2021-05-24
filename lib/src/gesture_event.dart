@@ -1,17 +1,21 @@
 import 'package:flutter/widgets.dart';
 
 class GestureEvent {
-  final int id;
-  final Offset position;
+  final int _id;
+  int get id => _id;
+
+  final Offset _position;
+  Offset get position => _position;
 
   GestureEvent({
-    required this.id,
-    required this.position,
-  });
+    required int id,
+    required Offset position,
+  })   : _id = id,
+        _position = position;
 
   GestureEvent.fromPointerEvent(PointerEvent event)
-      : id = event.pointer,
-        position = Offset(
+      : _id = event.pointer,
+        _position = Offset(
           event.localPosition.dx,
           event.localPosition.dy,
         );
