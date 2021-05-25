@@ -2,11 +2,11 @@ import 'package:flutter/widgets.dart';
 
 import 'package:dart_gestures/dart_gestures.dart';
 
-class MoveGestureEvent extends GestureEvent {
+class SinglePointerGestureEvent extends GestureEvent {
   final Offset _delta;
   Offset get delta => _delta;
 
-  MoveGestureEvent({
+  SinglePointerGestureEvent({
     required int id,
     required Offset position,
     required Offset delta,
@@ -16,7 +16,7 @@ class MoveGestureEvent extends GestureEvent {
           position: position,
         );
 
-  MoveGestureEvent.fromPointerEvent(PointerEvent event)
+  SinglePointerGestureEvent.fromPointerEvent(PointerEvent event)
       : _delta = Offset(
           event.delta.dx,
           event.delta.dy,

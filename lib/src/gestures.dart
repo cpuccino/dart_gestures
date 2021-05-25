@@ -64,25 +64,25 @@ class GesturesBuilder {
     });
   }
 
-  void _transitionPointerDownToMove(MoveGestureEvent event) {
-    _gestureType = GestureType.SinglePointerMove;
-
-    var touch = _touches.firstWhere((t) => t.id == event.id);
-    touch.startOffset = event.position;
-    _config.onMoveStart?.call(event);
-  }
-
-  void _transitionLongPressToMove(MoveGestureEvent event) {
+  void _transitionSinglePointerLongPressToMove(SinglePointerGestureEvent event) {
     var touch = _touches.firstWhere((t) => t.id == event.id);
     if (!_config.bypassMoveEventAfterLongPress) {
-      _transitionPointerDownToMove(event);
+      _transitionSinglePointerDownToMove(event);
       return;
     }
     touch.startOffset = touch.currentOffset;
   }
 
-  void _transitionPointersMoveLoop(MoveGestureEvent event) {
-    _config.onMoveUpdate?.call(event);
+  void _transitionSinglePointerDownToMove(SinglePointerGestureEvent event) {
+    _gestureType = GestureType.SinglePointerMove;
+
+    var touch = _touches.firstWhere((t) => t.id == event.id);
+    touch.startOffset = event.position;
+    _config.onSinglePointerMoveStart?.call(event);
+  }
+
+  void _transitionSinglePointerMoveLoop(SinglePointerGestureEvent event) {
+    _config.onSinglePointerMoveUpdate?.call(event);
   }
 
   void _transitionTwoPointersDownToMove(TwoPointersGestureEvent event) {
@@ -138,9 +138,9 @@ class GesturesBuilder {
     }
   }
 
-  void _transitionPointerMoveToPointerUp(MoveGestureEvent event) {
+  void _transitionSinglePointerMoveToPointerUp(SinglePointerGestureEvent event) {
     _gestureType = GestureType.Unknown;
-    _config.onMoveEnd?.call(event);
+    _config.onSinglePointerMoveEnd?.call(event);
   }
 
   void _transitionTwoPointersDownToPointerUp(TwoPointersGestureEvent event) {
@@ -188,22 +188,22 @@ class GesturesBuilder {
     }
     touch.currentOffset = event.position;
 
-    var moveGestureEvent = MoveGestureEvent.fromPointerEvent(event);
+    var singlePointerGestureEvent = SinglePointerGestureEvent.fromPointerEvent(event);
     var twoPointersGestureEvent = TwoPointersGestureEvent.fromPointerEvent(event, _touches);
     var threePointersGestureEvent = ThreePointersGestureEvent.fromPointerEvent(event);
     _clearGestureTimer();
 
     switch (_gestureType) {
-      case GestureType.SinglePointerDown:
-        _transitionPointerDownToMove(moveGestureEvent);
+      case GestureType.SinglePointerLongPress:
+        _transitionSinglePointerLongPressToMove(singlePointerGestureEvent);
         break;
 
-      case GestureType.SinglePointerLongPress:
-        _transitionLongPressToMove(moveGestureEvent);
+      case GestureType.SinglePointerDown:
+        _transitionSinglePointerDownToMove(singlePointerGestureEvent);
         break;
 
       case GestureType.SinglePointerMove:
-        _transitionPointersMoveLoop(moveGestureEvent);
+        _transitionSinglePointerMoveLoop(singlePointerGestureEvent);
         break;
 
       case GestureType.TwoPointersDown:
@@ -230,7 +230,7 @@ class GesturesBuilder {
   void onPointerUp(PointerEvent event) {
     _touches.removeWhere((t) => t.id == event.pointer);
     var gestureEvent = GestureEvent.fromPointerEvent(event);
-    var moveGestureEvent = MoveGestureEvent.fromPointerEvent(event);
+    var singlePointerGestureEvent = SinglePointerGestureEvent.fromPointerEvent(event);
     var twoPointersGestureEvent =
         TwoPointersGestureEvent.fromPointerEvent(event, _touches, _initialScale);
     var threePointersGestureEvent = ThreePointersGestureEvent.fromPointerEvent(event);
@@ -241,7 +241,7 @@ class GesturesBuilder {
         break;
 
       case GestureType.SinglePointerMove:
-        _transitionPointerMoveToPointerUp(moveGestureEvent);
+        _transitionSinglePointerMoveToPointerUp(singlePointerGestureEvent);
         break;
 
       case GestureType.TwoPointersDown:

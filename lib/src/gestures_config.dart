@@ -18,14 +18,14 @@ class GesturesConfig {
   final void Function(GestureEvent)? _onLongPress;
   Function(GestureEvent)? get onLongPress => _onLongPress;
 
-  final void Function(MoveGestureEvent)? _onMoveStart;
-  Function(MoveGestureEvent)? get onMoveStart => _onMoveStart;
+  final void Function(SinglePointerGestureEvent)? _onSinglePointerMoveStart;
+  Function(SinglePointerGestureEvent)? get onSinglePointerMoveStart => _onSinglePointerMoveStart;
 
-  final void Function(MoveGestureEvent)? _onMoveUpdate;
-  Function(MoveGestureEvent)? get onMoveUpdate => _onMoveUpdate;
+  final void Function(SinglePointerGestureEvent)? _onSinglePointerMoveUpdate;
+  Function(SinglePointerGestureEvent)? get onSinglePointerMoveUpdate => _onSinglePointerMoveUpdate;
 
-  final void Function(MoveGestureEvent)? _onMoveEnd;
-  Function(MoveGestureEvent)? get onMoveEnd => _onMoveEnd;
+  final void Function(SinglePointerGestureEvent)? _onSinglePointerMoveEnd;
+  Function(SinglePointerGestureEvent)? get onSinglePointerMoveEnd => _onSinglePointerMoveEnd;
 
   final void Function(TwoPointersGestureEvent)? _onTwoPointersMoveStart;
   Function(TwoPointersGestureEvent)? get onTwoPointersMoveStart => _onTwoPointersMoveStart;
@@ -64,9 +64,9 @@ class GesturesConfig {
     Function(GestureEvent)? onTap,
     Function(GestureEvent)? onDoubleTap,
     Function(GestureEvent)? onLongPress,
-    Function(MoveGestureEvent)? onMoveStart,
-    Function(MoveGestureEvent)? onMoveUpdate,
-    Function(MoveGestureEvent)? onMoveEnd,
+    Function(SinglePointerGestureEvent)? onSinglePointerMoveStart,
+    Function(SinglePointerGestureEvent)? onSinglePointerMoveUpdate,
+    Function(SinglePointerGestureEvent)? onSinglePointerMoveEnd,
     Function(TwoPointersGestureEvent)? onTwoPointersMoveStart,
     Function(TwoPointersGestureEvent)? onTwoPointersMoveUpdate,
     Function(TwoPointersGestureEvent)? onTwoPointersMoveEnd,
@@ -81,9 +81,9 @@ class GesturesConfig {
   })  : _onTap = onTap,
         _onDoubleTap = onDoubleTap,
         _onLongPress = onLongPress,
-        _onMoveStart = onMoveStart,
-        _onMoveUpdate = onMoveUpdate,
-        _onMoveEnd = onMoveEnd,
+        _onSinglePointerMoveStart = onSinglePointerMoveStart,
+        _onSinglePointerMoveUpdate = onSinglePointerMoveUpdate,
+        _onSinglePointerMoveEnd = onSinglePointerMoveEnd,
         _onTwoPointersMoveStart = onTwoPointersMoveStart,
         _onTwoPointersMoveUpdate = onTwoPointersMoveUpdate,
         _onTwoPointersMoveEnd = onTwoPointersMoveEnd,
