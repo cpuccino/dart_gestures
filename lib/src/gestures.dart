@@ -59,9 +59,8 @@ class GesturesBuilder {
       _gestureType = GestureType.Unknown;
       _clearGestureTimer();
 
-      if (_config.bypassTapEventOnDoubleTap && _config.onTap != null) {
-        _config.onTap!(event);
-      }
+      if (_config.bypassTapEventOnDoubleTap) return;
+      _config.onTap?.call(event);
     });
   }
 
@@ -83,8 +82,7 @@ class GesturesBuilder {
   }
 
   void _transitionPointersMoveLoop(MoveGestureEvent event) {
-    if (_config.onMoveUpdate == null) return;
-    _config.onMoveUpdate!(event);
+    _config.onMoveUpdate?.call(event);
   }
 
   void _transitionTwoPointersDownToMove(TwoPointersGestureEvent event) {
@@ -94,9 +92,8 @@ class GesturesBuilder {
     touch.startOffset = touch.currentOffset;
 
     _gestureType = GestureType.TwoPointersMove;
-    if (_config.onTwoPointersMoveStart == null) return;
 
-    _config.onTwoPointersMoveStart!(
+    _config.onTwoPointersMoveStart?.call(
       TwoPointersGestureEvent(
         id: event.id,
         touches: _touches,
@@ -106,27 +103,24 @@ class GesturesBuilder {
   }
 
   void _transitionTwoPointersMoveLoop(TwoPointersGestureEvent event) {
-    if (_config.onTwoPointersMoveUpdate == null) return;
-    _config.onTwoPointersMoveUpdate!(event);
+    _config.onTwoPointersMoveUpdate?.call(event);
   }
 
   void _transitionThreePointersDownToMove(ThreePointersGestureEvent event) {
     var touch = _touches.firstWhere((t) => t.id == event.id);
     touch.startOffset = touch.currentOffset;
     _gestureType = GestureType.ThreePointersMove;
-    if (_config.onThreePointersMoveStart == null) return;
-    _config.onThreePointersMoveStart!(event);
+    _config.onThreePointersMoveStart?.call(event);
   }
 
   void _transitionThreePointersMoveLoop(ThreePointersGestureEvent event) {
-    if (_config.onThreePointersMoveUpdate == null) return;
-    _config.onThreePointersMoveUpdate!(event);
+    _config.onThreePointersMoveUpdate?.call(event);
   }
 
   void _transitionPointerDownToPointerUp(GestureEvent event) {
     var gestureEvent = event;
     var bypassDoubleTap = !_config.bypassTapEventOnDoubleTap || _config.onDoubleTap == null;
-    if (bypassDoubleTap && _config.onTap != null) _config.onTap!(gestureEvent);
+    if (bypassDoubleTap) _config.onTap?.call(gestureEvent);
 
     if (_config.onDoubleTap == null) return;
     if (_doubleTapTimer == null) {
@@ -138,7 +132,7 @@ class GesturesBuilder {
     var focalPoint = (event.position - _previousCoordinate!);
     if (_previousCoordinate != null &&
         focalPoint.distance < GesturesConfig.DOUBLE_TAP_CONSIDERATION_DEFAULT) {
-      _config.onDoubleTap!(gestureEvent);
+      _config.onDoubleTap?.call(gestureEvent);
     } else {
       _initializeDoubleTap(gestureEvent);
     }
@@ -146,14 +140,12 @@ class GesturesBuilder {
 
   void _transitionPointerMoveToPointerUp(MoveGestureEvent event) {
     _gestureType = GestureType.Unknown;
-    if (_config.onMoveEnd == null) return;
-    _config.onMoveEnd!(event);
+    _config.onMoveEnd?.call(event);
   }
 
   void _transitionTwoPointersDownToPointerUp(TwoPointersGestureEvent event) {
     _gestureType = GestureType.Unknown;
-    if (_config.onTwoPointersMoveEnd == null) return;
-    _config.onTwoPointersMoveEnd!(event);
+    _config.onTwoPointersMoveEnd?.call(event);
   }
 
   void _transitionTwoPointersMoveToPointerUp(TwoPointersGestureEvent event) {
@@ -162,9 +154,7 @@ class GesturesBuilder {
 
   void _transitionThreePointersDownToPointerUp(ThreePointersGestureEvent event) {
     _gestureType = GestureType.Unknown;
-    if (_config.onThreePointersMoveEnd == null) return;
-
-    _config.onThreePointersMoveEnd!(event);
+    _config.onThreePointersMoveEnd?.call(event);
   }
 
   void _transitionThreePointersMoveToPointerUp(ThreePointersGestureEvent event) {
