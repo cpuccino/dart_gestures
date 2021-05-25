@@ -1,10 +1,18 @@
-# Dart Gestures
+<br />
+
+```
+ ______ _______ _______ _______ _     _  ______ _______ _______
+|  ____ |______ |______    |    |     | |_____/ |______ |______
+|_____| |______ ______|    |    |_____| |    \_ |______ ______|
+
+```                                                                
+
 
 Dart gestures is a multi-touch gesture package built with dart that supports various prebuilt multi-touch actions
 
-<br />
+### Implementation
 
-### Supported gestures
+#### Supported gestures
 - Tap
 - Double Tap
 - Long Press
