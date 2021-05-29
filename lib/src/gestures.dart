@@ -17,7 +17,7 @@ class GesturesBuilder {
 
   GesturesBuilder({
     required GesturesConfig config,
-  })   : _config = config,
+  })  : _config = config,
         _initialScale = GesturesConfig.INITIAL_SCALE_DEFAULT,
         _gestureType = GestureType.Unknown,
         _touches = [];

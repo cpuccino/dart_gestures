@@ -10,7 +10,7 @@ class GestureEvent {
   GestureEvent({
     required int id,
     required Offset position,
-  })   : _id = id,
+  })  : _id = id,
         _position = position;
 
   GestureEvent.fromPointerEvent(PointerEvent event)

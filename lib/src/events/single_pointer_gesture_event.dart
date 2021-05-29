@@ -10,7 +10,7 @@ class SinglePointerGestureEvent extends GestureEvent {
     required int id,
     required Offset position,
     required Offset delta,
-  })   : _delta = delta,
+  })  : _delta = delta,
         super(
           id: id,
           position: position,

@@ -18,7 +18,7 @@ class TwoPointersGestureEvent extends GestureEvent {
     required int id,
     required List<Touch> touches,
     required double initialScale,
-  })   : _rotation = _angleBetweenTouches(touches),
+  })  : _rotation = _angleBetweenTouches(touches),
         _initialScale = initialScale,
         _scale = _calculateScale(touches),
         super(
