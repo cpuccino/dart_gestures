@@ -1,6 +1,6 @@
 name: dart_gestures
 description: Dart gestures is a multi-touch gesture package built with dart that supports various prebuilt multi-touch actions
-version: 0.0.1
+version: 0.1.0
 author: cpuccino
 homepage: https://github.com/cpuccino/dart_gestures
 publish_to: none
