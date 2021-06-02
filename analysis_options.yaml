@@ -5,3 +5,7 @@ analyzer:
     unnecessary_getters_setters: ignore
     slash_for_doc_comments: false
     todo: ignore
+
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false

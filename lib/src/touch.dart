@@ -6,11 +6,11 @@ class Touch {
 
   Offset _startOffset;
   Offset get startOffset => _startOffset;
-  set startOffset(value) => _startOffset = value;
+  set startOffset(Offset value) => _startOffset = value;
 
   Offset _currentOffset;
   Offset get currentOffset => _currentOffset;
-  set currentOffset(value) => _currentOffset = value;
+  set currentOffset(Offset value) => _currentOffset = value;
 
   Touch({
     required int id,
